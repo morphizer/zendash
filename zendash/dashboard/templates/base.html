@@ -1,0 +1,30 @@
+<html>
+    <head><title>{% block title %}default title{% endblock %}</title>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $('#events').dataTable( {
+                "bProcessing": true,
+                "sAjaxSource": '/dashboard/getevents/',
+                "sAjaxDataProp": "events",
+                "aoColumns": [
+                    { "mData": "count" },
+                    { "mData": "firstTime" },
+                    { "mData": "severity" },
+                    { "mData": "evid" },
+                    { "mData": "component" },
+                    { "mData": "summary" },
+                    { "mData": "eventState" },
+                    { "mData": "device" },
+                    { "mData": "eventClass" },
+                    { "mData": "lastTime" },
+                    { "mData": "id" }
+                ]
+            } );
+        } );
+        </script>
+    </head>
+<div id="body">{% block body %}{% endblock %}</div>
+</body>
+</html>
