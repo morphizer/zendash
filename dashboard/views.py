@@ -34,8 +34,11 @@ def configuration(request):
             c.save()
             return HttpResponseRedirect('/dashboard/')
     else:
-        config = Configuration.objects.get(pk=1)
-        form = ConfigurationForm(instance=config)
+        try:
+            config = Configuration.objects.get(pk=1)
+            form = ConfigurationForm(instance=config)
+        except Configuration.DoesNotExist:
+            form = ConfigurationForm()
 
     return render(request, 'configuration.html', {
         'form': form,
