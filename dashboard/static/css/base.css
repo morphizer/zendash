@@ -115,8 +115,25 @@ table.pretty tbody td {
     background: #d5eaf0;
 }
         
-table.pretty tbody tr.odd td { 
-    background: #bcd9e1;
+/* Severity Row Colors */
+table.pretty tbody tr.severity_5 td { 
+    background: #DC143C;
+}
+
+table.pretty tbody tr.severity_4 td { 
+    background: #FFA500;
+}
+
+table.pretty tbody tr.severity_3 td { 
+    background: #FFFF00;
+}
+
+table.pretty tbody tr.severity_2 td { 
+    background: #4682B4;
+}
+
+table.pretty tbody tr.severity_1 td { 
+    background: #778899;
 }
 
 /* Footer cells */  

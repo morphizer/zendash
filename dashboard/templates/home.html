@@ -5,29 +5,53 @@
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/reset-min.css"></link>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css"></link>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.3.min.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function() {
-              $('#events').dataTable( {
-                  "bProcessing": true,
-                  "sPaginationType": "full_numbers",
-                  "sAjaxSource": '/dashboard/getevents/',
-                  "sAjaxDataProp": "events",
-                  "aoColumns": [
-                      { "mData": "count" },
-                      { "mData": "firstTime" },
-                      { "mData": "severity" },
-                      { "mData": "component.text" },
-                      { "mData": "summary" },
-                      { "mData": "eventState" },
-                      { "mData": "device.text" },
-                      { "mData": "eventClass.text" },
-                      { "mData": "lastTime" },
-                  ]
-              } );
-          } );
-      </script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dataTables.min.js"></script>
+<style>
+    .severity_5 { background: red; }
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#events').dataTable( {
+        "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+            if ( aData['severity'] == "5" ) {
+                nRow.className = 'severity_5';
+            }
+            else if ( aData['severity'] == "4" ) {
+                nRow.className = 'severity_4';
+            }
+            else if ( aData['severity'] == "3" ) {
+                nRow.className = 'severity_3';
+            }
+            else if ( aData['severity'] == "2" ) {
+                nRow.className = 'severity_2';
+            }
+            else if ( aData['severity'] == "1" ) {
+                nRow.className = 'severity_1';
+            }
+            return nRow; 
+        },
+        "bProcessing": true,
+        "bPaginate": false,
+        "sScrollY": "85%",
+        "sAjaxSource": '/dashboard/getevents/',
+        "sAjaxDataProp": "events",
+        "aoColumns": [
+            { "mData": "count" },
+            { "mData": "firstTime" },
+            { "mData": "severity" },
+            { "mData": "component.text" },
+            { "mData": "summary" },
+            { "mData": "eventState" },
+            { "mData": "device.text" },
+            { "mData": "eventClass.text" },
+            { "mData": "lastTime" },
+        ]
+    } );
+} );
+
+    
+</script>
 {% endblock %}
 
 {% block body %}
@@ -45,19 +69,6 @@
             <th>Last Time</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
 </table>
 
 <a href="/dashboard/configuration">Configuration</a>
