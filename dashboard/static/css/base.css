@@ -1,45 +1,19 @@
 /*
- * Colour dictionary:
- *
- * Table control elements:   #719ba7
- * Header cells:             #66A9BD
- * Body header cells:        #91c5d4
- * Body content cells:       #d5eaf0
- * Body content cells (alt): #bcd9e1
- * Footer header:            #b0cc7f
- * Footer content:           #d7e1c5
- */
-
-
-/*
  * Page setup styles
  */
 body {
     font: 80%/1.45em Arial, Verdana, Helvetica, sans-serif;
     margin: 0;
-    padding: 0;
     color: #111;
-    background-color: #fff;
+    background-color: #CCCDCF;
 }
-
-#container {
-    margin: 0 auto;
-    width: 960px
-}
-
-h1 {
-    text-align: center;
-    font-size: 1.2em;
-    font-weight: bold;
-    margin: 1em 0;
-}
-
 
 /*
  * DataTables framework
  */
 div.dataTables_wrapper {
-    background-color: #719ba7;
+    width: 100%;
+    background-color: #CCCDCF;
 }
 
 div.dataTables_length {
@@ -52,16 +26,11 @@ div.dataTables_filter {
 
 div.dataTables_info {
     padding: 9px 6px 6px 6px;
-    float: left;
-}
-
-div.dataTables_paginate {
     float: right;
 }
 
 div.dataTables_length,
-div.dataTables_filter,
-div.dataTables_paginate {
+div.dataTables_filter {
     padding: 6px;
 }
 
@@ -88,13 +57,11 @@ html[xmlns] .dataTables_wrapper {
  * Table styles
  */
 table.pretty {
-    width: 100%;
     clear: both;
 }
 
 table.pretty td,
 table.pretty th {
-    padding: 5px;
     border: 1px solid #fff;
 }
 
@@ -146,40 +113,6 @@ table.pretty tfoot td {
     background: #d7e1c5;
     text-align: center;
     font-weight: bold;
-}
-
-
-/*
- * Pagination
- */
-a.paginate_button,
-a.paginate_active {
-    display: inline-block;
-    background-color: #608995;
-    padding: 2px 6px;
-    margin-left: 2px;
-    cursor: pointer;
-    *cursor: hand;
-}
-
-a.paginate_active {
-    background-color: transparent;
-    border: 1px solid black;
-}
-
-a.paginate_button_disabled {
-    color: #3d6672;
-}
-.paging_full_numbers a:active {
-    outline: none
-}
-.paging_full_numbers a:hover {
-    text-decoration: none;
-}
-
-div.dataTables_paginate span>a {
-    width: 15px;
-    text-align: center;
 }
 
 

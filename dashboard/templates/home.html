@@ -7,49 +7,8 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css"></link>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dataTables.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#events').dataTable( {
-        "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
-            if ( aData['severity'] == "5" ) {
-                nRow.className = 'severity_5';
-            }
-            else if ( aData['severity'] == "4" ) {
-                nRow.className = 'severity_4';
-            }
-            else if ( aData['severity'] == "3" ) {
-                nRow.className = 'severity_3';
-            }
-            else if ( aData['severity'] == "2" ) {
-                nRow.className = 'severity_2';
-            }
-            else if ( aData['severity'] == "1" ) {
-                nRow.className = 'severity_1';
-            }
-            return nRow; 
-        },
-        "bProcessing": true,
-        "bPaginate": false,
-        "sScrollY": "85%",
-        "sAjaxSource": '/dashboard/getevents/',
-        "sAjaxDataProp": "events",
-        "aoColumns": [
-            { "mData": "severity", "bVisible": false },
-            { "mData": "count" },
-            { "mData": "firstTime" },
-            { "mData": "component.text" },
-            { "mData": "summary" },
-            { "mData": "eventState" },
-            { "mData": "device.text" },
-            { "mData": "eventClass.text" },
-            { "mData": "lastTime" },
-        ],
-        "aaSorting": [[ 0, "desc" ]],
-    } );
-} );
-
-    
-</script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/events_table.js"></script>
+<meta http-equiv="refresh" content="10">
 {% endblock %}
 
 {% block body %}

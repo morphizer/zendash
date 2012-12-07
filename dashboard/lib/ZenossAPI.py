@@ -47,9 +47,13 @@ class ZenossAPI():
 
         return json.loads(self.urlOpener.open(req, reqData).read())
 
-    def get_events(self, device=None, component=None, eventClass=None):
+    def get_events(self, device=None, component=None, eventClass=None, showAck=None):
         data = dict(start=0, limit=100, dir='DESC', sort='severity')
-        data['params'] = dict(severity=[5,4,3,2], eventState=[0,1])
+        if showAck:
+            data['params'] = dict(severity=[5,4,3,2], eventState=[0,1])
+        else:
+            data['params'] = dict(severity=[5,4,3,2], eventState=[0])
+
 
         if device: data['params']['device'] = device
         if component: data['params']['component'] = component

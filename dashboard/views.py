@@ -16,7 +16,7 @@ def getevents(request):
                    config.zenoss_username,
                    config.zenoss_password
                  )
-    events = z.get_events()
+    events = z.get_events(showAck = config.show_acknowledged)
 
     return HttpResponse(simplejson.dumps(events))
 
@@ -30,6 +30,7 @@ def configuration(request):
             c = Configuration( zenoss_instance = zenoss_instance, 
                                zenoss_username = zenoss_username,
                                zenoss_password = zenoss_password,
+                               show_acknowledged = form.cleaned_data['show_acknowledged'],
                              )
             c.save()
             return HttpResponseRedirect('/dashboard/')
