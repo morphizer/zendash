@@ -7,8 +7,12 @@ from dashboard.models import Configuration
 from dashboard.forms import ConfigurationForm
 
 def index(request):
+    config = Configuration.objects.get(pk=1)
+    refresh_interval = config.refresh_interval
 
-    return render(request, 'home.html')
+    return render(request, 'home.html', {
+        'refresh_interval': refresh_interval, 
+    })
 
 def getevents(request):
     config = Configuration.objects.get(pk=1)

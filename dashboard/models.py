@@ -5,4 +5,5 @@ class Configuration(models.Model):
     zenoss_username = models.CharField(max_length=30)
     zenoss_password = models.CharField(max_length=60)
     show_acknowledged = models.NullBooleanField()
+    refresh_interval = models.PositiveIntegerField(default=10)
 
