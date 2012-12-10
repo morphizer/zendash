@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#events').dataTable({
+    var oTable = $('#events').dataTable({
         "fnRowCallback": function(nRow, aData, iDisplayIndex){
             if (aData['severity'] == "5"){
                 nRow.className = 'severity_5';
@@ -19,30 +19,19 @@ $(document).ready(function () {
         "sAjaxSource": '/dashboard/getevents/',
         "sAjaxDataProp": "events",
         "sScrollY": "85%",
+        "oLanguage": {
+            "sEmptyTable": "No events to display!",
+        },
+        "sDom": 'rt<"bottom"filp><"clear">',
         "aoColumns": [
             { "mData": "severity", "bVisible": false },
-            { "mData": "count" },
-            { "mData": "firstTime" },
-            { "mData": "component.text" },
-            { "mData": "summary" },
-            { "mData": "eventState" },
+            { "mData": "count", "sWidth": "5%" },
             { "mData": "device.text" },
-            { "mData": "eventClass.text" },
+            { "mData": "component.text" },
+            { "mData": "summary", "sWidth": "50%" },
+            { "mData": "firstTime" },
             { "mData": "lastTime" },
         ],
         "aaSorting": [[ 0, "desc" ]],
     } );
-
-/*    $.fn.dataTableExt.afnFiltering.push(
-            function(oSettings, aData, iDataIndex){
-                var row = oSettings.aoData[iDataIndex].nTr,
-                    show = $(".toggle-row-display .selected").data("show"),
-                    status = +$(row).data("action_approved");
-
-                if (show === "all"){
-                    return true;
-                } else if (show === "Acknowledged") {
-                    return (status === 1);
-                } else if (show === "New")
-                */
 } );

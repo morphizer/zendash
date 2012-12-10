@@ -34,11 +34,11 @@ def configuration(request):
     else:
         try:
             config = Configuration.objects.get(pk=1)
-            form = ConfigurationForm(instance=config)
+            # Radio button doesn't seem to be properly filled in, so add it manually
+            form = ConfigurationForm(instance=config, initial={'show_acknowledged': config.show_acknowledged})
         except Configuration.DoesNotExist:
             form = ConfigurationForm()
 
     return render(request, 'configuration.html', {
         'form': form,
     })
-
