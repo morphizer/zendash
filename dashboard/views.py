@@ -1,10 +1,10 @@
-# Create your views here.
-
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.utils import simplejson
+
 from dashboard.lib.ZenossAPI import ZenossAPI
-from dashboard.models import Configuration, ConfigurationForm
+from dashboard.models import Configuration
+from dashboard.forms import ConfigurationForm
 
 def index(request):
 
@@ -22,17 +22,10 @@ def getevents(request):
 
 def configuration(request):
     if request.method == 'POST':
-        form = ConfigurationForm(request.POST)
+        config = Configuration.objects.get(pk=1)
+        form = ConfigurationForm(request.POST, instance=config)
         if form.is_valid():
-            zenoss_instance = form.cleaned_data['zenoss_instance']
-            zenoss_username = form.cleaned_data['zenoss_username']
-            zenoss_password = form.cleaned_data['zenoss_password']
-            c = Configuration( zenoss_instance = zenoss_instance, 
-                               zenoss_username = zenoss_username,
-                               zenoss_password = zenoss_password,
-                               show_acknowledged = form.cleaned_data['show_acknowledged'],
-                             )
-            c.save()
+            form.save()
             return HttpResponseRedirect('/dashboard/')
     else:
         try:
