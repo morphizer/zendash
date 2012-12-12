@@ -7,12 +7,15 @@ from dashboard.models import Configuration
 from dashboard.forms import ConfigurationForm
 
 def index(request):
-    config = Configuration.objects.get(pk=1)
-    refresh_interval = config.refresh_interval
+    try:
+        config = Configuration.objects.get(pk=1)
+        refresh_interval = config.refresh_interval
+        return render(request, 'home.html', {
+            'refresh_interval': refresh_interval, 
+        })
 
-    return render(request, 'home.html', {
-        'refresh_interval': refresh_interval, 
-    })
+    except Configuration.DoesNotExist:
+        return render(request, 'home.html')
 
 def getevents(request):
     config = Configuration.objects.get(pk=1)
@@ -26,8 +29,12 @@ def getevents(request):
 
 def configuration(request):
     if request.method == 'POST':
-        config = Configuration.objects.get(pk=1)
-        form = ConfigurationForm(request.POST, instance=config)
+        try:
+            config = Configuration.objects.get(pk=1)
+            form = ConfigurationForm(request.POST, instance=config)
+        except Configuration.DoesNotExist:
+            form = ConfigurationForm(request.POST)
+
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/dashboard/')

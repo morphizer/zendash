@@ -30,3 +30,17 @@ Bit overkill as it's only storing a few config options, but:
 * Run the migration
 
         $ python manage.py migrate dashboard
+
+### Deploying to Apache + mod_wsgi ###
+
+Install apache and mod_wsgi, then setup zendash:
+    
+    $ git clone git://github.com/morphizer/zendash.git
+    $ cd /path/to/zendash
+    $ virtualenv dashboard-env
+    $ source ./dashboard-env
+    $ pip install -r requirements.txt
+    $ python manage.py syncdb
+    $ python manage.py migrate dashboard
+
+Use example vhost configuration provided, changing paths as needed
